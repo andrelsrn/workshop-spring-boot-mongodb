@@ -1,6 +1,7 @@
 package com.andrenunes.workshopmongo.services;
 
 import com.andrenunes.workshopmongo.domain.User;
+import com.andrenunes.workshopmongo.dto.UserDTO;
 import com.andrenunes.workshopmongo.repository.UserRepository;
 import com.andrenunes.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +26,13 @@ public class UserService {
         }
         return user;
     }
+
+    public User insert(User user) {
+        return repository.insert(user);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+    }
+
 }
