@@ -1,6 +1,7 @@
 package com.andrenunes.workshopmongo.resources;
 
 import com.andrenunes.workshopmongo.domain.User;
+import com.andrenunes.workshopmongo.dto.UserDTO;
 import com.andrenunes.workshopmongo.repository.UserRepository;
 import com.andrenunes.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,10 @@ public class UserResources {
     private UserService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
         List<User> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+        List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).toList();
+        return ResponseEntity.ok().body(listDto);
     }
 
 }
